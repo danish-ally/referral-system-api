@@ -1,0 +1,40 @@
+name: Dev Server Deployment
+on:
+  push:
+    branches: ['development']
+
+jobs:
+  sonarqube:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm install
+     
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+  Deploy: 
+      name : Deploying to the Dev Server
+      needs: sonarqube
+      runs-on: self-hosted
+      steps:
+       - uses: actions/checkout@v4
+       - run: cp /var/www/referral-system-api/secret/.env /var/www/referral-system-api/actions-runner/_work/referral-system-api/referral-system-api
+       - run: npm i
+       - run: pm2 list
+       - run: vet scan -D  /var/www/referral-system-api/actions-runner/_work/referral-system-api/referral-system-api/
+       - run: pm2 restart referral-system-api
+
+

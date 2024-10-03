@@ -1,0 +1,2756 @@
+openapi: 3.0.0
+info:
+  title: Referral System
+  version: 1.0.0
+paths:
+   # get course list
+  /api/v1/external/getcourse/{channelId}:
+    get:
+      tags:
+        - External APIs
+      summary: Get Course list by Channel ID.
+      parameters:
+        - in: path
+          name: channelId
+          description: ID of the channel for which to retrieve the course plan
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Got Course list successfully"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Got Course list successfully"
+              data:
+                type: array
+                description: List of courses
+        404:
+          description: Course not found
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Course not found!!"
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Internal Server Error"
+  # get package list
+  /api/v1/external/getpackage/{channelId}:
+    get:
+      tags:
+        - External APIs
+      summary: Get Package list by Channel ID.
+      parameters:
+        - in: path
+          name: channelId
+          description: ID of the channel for which to retrieve the course plan
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Got Package list successfully"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Got Package list successfully"
+              data:
+                type: array
+                description: List of packages
+        404:
+          description: Package not found
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Package not found!!"
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Internal Server Error"
+  # get Bootcamp list
+  /api/v1/external/getbootcamp/{channelId}:
+    get:
+      tags:
+        - External APIs
+      summary: Get Bootcamp list by Channel ID.
+      parameters:
+        - in: path
+          name: channelId
+          description: ID of the channel for which to retrieve the course plan
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Got Bootcamp list successfully"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Got Bootcamp list successfully"
+              data:
+                type: array
+                description: List of bootcamps
+        404:
+          description: Bootcamp not found
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Bootcamp not found!!"
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Internal Server Error"
+  
+    get:
+      tags:
+        - External APIs
+      summary: Get Sales Caller list.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Got Sales Caller list successfully"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Got Sales Caller list successfully"
+              data:
+                type: array
+                description: List of sales callers
+        404:
+          description: Sales Caller list not found
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Sales Caller list not found!!"
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Internal Server Error"
+ 
+  # get course plan by course id
+  /api/v1/external/getCoursePlan/{courseId}/{channelId}:
+    get:
+      tags:
+        - External APIs
+      summary: Get Course Plan by Course ID
+      parameters:
+        - in: path
+          name: courseId
+          description: ID of the course for which to retrieve the course plan
+          required: true
+          type: string
+        - in: path
+          name: channelId
+          description: ID of the channel for which to retrieve the course plan
+          required: true
+          type: string
+        - in: header
+          name: authorization
+          description: Authorization token for authentication
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Got Course Plan successfully"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Got Course Plan successfully"
+              data:
+                type: object # Adjust the schema based on the actual structure of your course plan data
+                description: Course plan details
+        404:
+          description: Course or plan not found
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Course or plan not found!!"
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Internal Server Error"
+              err:
+                type: string
+                example: "Error message from the server"
+  # get package plan by package id
+  /api/v1/external/getPackagePlan/{packageId}/{channelId}:
+    get:
+      tags:
+        - External APIs
+      summary: Get Package Plan by Package ID
+      parameters:
+        - in: path
+          name: packageId
+          description: ID of the package for which to retrieve the package plan
+          required: true
+          type: string
+        - in: path
+          name: channelid
+          description: Channel ID for filtering packages.
+          required: true
+          type: string
+        - in: header
+          name: authorization
+          description: Authorization token for authentication
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Got Package Plan successfully"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Got Package Plan successfully"
+              data:
+                type: object # Adjust the schema based on the actual structure of your package plan data
+                description: Package plan details
+        404:
+          description: Package or plan not found
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Package or plan not found!!"
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Internal Server Error"
+              err:
+                type: string
+                example: "Error message from the server"
+  /api/v1/external/getUserdata:
+    get:
+      tags:
+        - External APIs
+      summary: Get Sales User list.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Got User list successfully"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Got User list successfully"
+              data:
+                type: array
+                description: List of User
+        404:
+          description: User list not found
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "User not found!!"
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Internal Server Error"
+ # Get Student List
+  /api/v1/external/getStudentlist/{channelId}:
+    get:
+      tags:
+        - External APIs
+      summary: Retrieve the list of students
+      parameters:
+        - name: channelId
+          in: path
+          description: The channel ID to determine the base URL
+          required: true
+          schema:
+            type: integer
+        - name: search
+          in: query
+          description: Search parameter for filtering students
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: Offset for pagination
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Limit for pagination
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                data:
+                  - id: 348
+                    full_name: tarak2611v2
+                    email: tarak2611v2@mailinator.com
+                    phone: '8902124317'
+                    country_code: 91
+                  - id: 347
+                    full_name: tarak2112v3
+                    email: tarak2112v3@mailinator.com
+                    phone: '8902124317'
+                    country_code: 91
+                meta:
+                  total: 322
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                message: Unauthorized
+                error: true
+                err: Unauthorized
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: Internal server error
+                error: true
+                err: Internal server error
+  # get referral link list
+  /api/v1/referral-link:
+    get:
+      tags:
+        - Referral Link
+      summary: Get a list of referral links
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination (default: 1)
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Number of items to return per page (default: 10)
+          schema:
+            type: integer
+        - name: status
+          in: query
+          description: Filter by status
+          schema:
+            type: string
+        - name: courseType
+          in: query
+          description: Filter by courseType
+          schema:
+            type: string
+        - name: planId
+          in: query
+          description: Filter by planId
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: Search term to filter results
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                totalItems: 20
+                totalPages: 2
+                currentPage: 1
+                pageSize: 10
+                referralLinks:
+                  - referralLink: "https://example.com/ref1"
+                    channel: "Channel 1"
+                    userDiscount:
+                      discountType: "Percentage"
+                      discountAmount: 10
+                    userLimit: 100
+                    referralCode: "REF123"
+                    courseType: "Type A"
+                    status: "Active"
+                  # Add more referral links as needed
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+    post:
+      tags:
+        - Referral Link
+      summary: Generate a new referral link
+      requestBody:
+        description: Payload for generating a referral link
+        required: true
+        content:
+          application/json:
+            example:
+              channel: "Channel 1"
+              planId: "123"
+              discountType: "Percentage"
+              discountAmount: 10
+              startDate: "2023-01-01"
+              endDate: "2023-12-31"
+              userLimit: 100
+              status: "Active"
+              courseType: "Type A"
+              courseInfo: "Course information here"
+              coursePlanInfo: "Course plan information here"
+      responses:
+        '201':
+          description: Referral link generated successfully
+          content:
+            application/json:
+              example:
+                _id: "1234567890"
+                channel: "Channel 1"
+                planId: "123"
+                userDiscount:
+                  discountType: "Percentage"
+                  discountAmount: 10
+                validityRange:
+                  startDate: "2023-01-01"
+                  endDate: "2023-12-31"
+                userLimit: 100
+                status: "Active"
+                referralLink: "https://example.com/ref1"
+                referralCode: "REF123"
+                token: "generated.jwt.token"
+                courseType: "Type A"
+                courseInfo: "Course information here"
+                coursePlanInfo: "Course plan information here"
+        '400':
+          description: Invalid payload
+          content:
+            application/json:
+              example:
+                message: "Invalid payload."
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error."
+                error: "Error details here"
+
+# get referral link list of a influencer
+  /api/v1/referral-link/{id}:
+    get:
+      tags:
+        - Referral Link
+      summary: Get a list of referral links based on influencer
+      parameters:
+        - name: id
+          in: path
+          description: ID of the influencer
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination (default: 1)
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Number of items to return per page (default: 10)
+          schema:
+            type: integer
+        - name: status
+          in: query
+          description: Filter by status
+          schema:
+            type: string
+        - name: courseType
+          in: query
+          description: Filter by courseType
+          schema:
+            type: string
+        - name: planId
+          in: query
+          description: Filter by planId
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: Search term to filter results
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                totalItems: 20
+                totalPages: 2
+                currentPage: 1
+                pageSize: 10
+                referralLinks:
+                  - referralLink: "https://example.com/ref1"
+                    channel: "Channel 1"
+                    userDiscount:
+                      discountType: "Percentage"
+                      discountAmount: 10
+                    userLimit: 100
+                    referralCode: "REF123"
+                    courseType: "Type A"
+                    status: "Active"
+                  # Add more referral links as needed
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+
+# generate referral link by admin for influencer
+  /api/v1/referral-link/admin:
+    post:
+      tags:
+        - Referral Link
+      summary: Generate a new referral link for influencer
+      requestBody:
+        description: Payload for generating a referral link for influencer
+        required: true
+        content:
+          application/json:
+            example:
+              userinfo:
+                id: "456788900"
+                name: "danish"
+                email: "danish@gmail.com"
+                phone: "5678943268"
+              channel: "Channel 1"
+              planId: "123"
+              discountType: "Percentage"
+              discountAmount: 10
+              startDate: "2023-01-01"
+              endDate: "2023-12-31"
+              userLimit: 100
+              status: "Active"
+              courseType: "Type A"
+              courseInfo: "Course information here"
+              coursePlanInfo: "Course plan information here"
+      responses:
+        '201':
+          description: Referral link generated successfully
+          content:
+            application/json:
+              example:
+                userinfo:
+                  id: "456788900"
+                  name: "danish"
+                  email: "danish@gmail.com"
+                channel: "Channel 1"
+                planId: "123"
+                userDiscount:
+                  discountType: "Percentage"
+                  discountAmount: 10
+                validityRange:
+                  startDate: "2023-01-01"
+                  endDate: "2023-12-31"
+                userLimit: 100
+                status: "Active"
+                referralLink: "https://example.com/ref1"
+                referralCode: "REF123"
+                token: "generated.jwt.token"
+                courseType: "Type A"
+                courseInfo: "Course information here"
+                coursePlanInfo: "Course plan information here"
+        '400':
+          description: Invalid payload
+          content:
+            application/json:
+              example:
+                message: "Invalid payload."
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error."
+                error: "Error details here"
+# generate referral link for student
+  /api/v1/referral-link/student/{channelId}/{studentId}:
+    post:
+      tags:
+        - Referral Link
+      summary: Generate a new referral link for a student
+      parameters:
+        - name: channelId
+          in: path
+          description: ID of the channel
+          required: true
+          schema:
+            type: string
+        - name: studentId
+          in: path
+          description: ID of the student
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Referral link generated successfully
+          content:
+            application/json:
+              example:
+                message: "Link generated sucessfully"
+                error: false
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error."
+                error: "Error details here"
+  
+  /api/v1/referral-link/{referralLinkId}:
+    delete:
+      tags:
+        - Referral Link
+      summary: Delete a referral link
+      parameters:
+        - name: referralLinkId
+          in: path
+          description: ID of the referral link to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Referral link deleted successfully
+          content:
+            application/json:
+              example:
+                message: "ReferralLink Deleted"
+        '400':
+          description: Missing required parameters
+          content:
+            application/json:
+              example:
+                message: "Missing required params: referralLinkId"
+        '404':
+          description: ReferralLink not found
+          content:
+            application/json:
+              example:
+                message: "ReferralLink not found"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+    put:
+      tags:
+        - Referral Link
+      summary: Update an existing referral link
+      parameters:
+        - name: referralLinkId
+          in: path
+          description: ID of the referral link to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Payload for updating a referral link
+        required: true
+        content:
+          application/json:
+            example:
+              channel: "Updated Channel"
+              planId: "456"  # Updated planId
+              discountType: "Fixed"  # Updated discountType
+              discountAmount: 15  # Updated discountAmount
+              startDate: "2023-02-01"
+              endDate: "2023-12-31"
+              userLimit: 150  # Updated userLimit
+              status: "Active"
+              courseType: "Type B"  # Updated courseType
+              courseInfo: "Updated course information"
+              coursePlanInfo: "Updated course plan information"
+      responses:
+        '200':
+          description: Referral link updated successfully
+          content:
+            application/json:
+              example:
+                _id: "1234567890"
+                channel: "Updated Channel"
+                planId: "456"  # Updated planId
+                userDiscount:
+                  discountType: "Fixed"  # Updated discountType
+                  discountAmount: 15  # Updated discountAmount
+                validityRange:
+                  startDate: "2023-02-01"
+                  endDate: "2023-12-31"
+                userLimit: 150  # Updated userLimit
+                status: "Active"
+                referralLink: "https://example.com/ref-updated"
+                referralCode: "REF456"
+                token: "updated.jwt.token"
+                courseType: "Type B"  # Updated courseType
+                courseInfo: "Updated course information"
+                coursePlanInfo: "Updated course plan information"
+        '400':
+          description: Invalid payload or request
+          content:
+            application/json:
+              example:
+                message: "Invalid payload or request."
+        '404':
+          description: ReferralLink not found
+          content:
+            application/json:
+              example:
+                message: "ReferralLink not found"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+  /api/v1/referral-link/{referralLinkId}/status:
+    patch:
+      tags:
+        - Referral Link
+      summary: Update an existing referral link Status
+      parameters:
+        - name: referralLinkId
+          in: path
+          description: ID of the referral link to be update status
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Payload for chnage status of a referral link
+        required: true
+        content:
+          application/json:
+            example:
+              status: "Inactive"
+      responses:
+        '200':
+          description: Referral link status updated successfully
+        '404':
+          description: ReferralLink not found
+          content:
+            application/json:
+              example:
+                message: "ReferralLink not found"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+  /api/v1/referral-link/studentEarningDetails/channel/{channelId}:
+    get:
+      tags:
+        - Referral Link
+      summary: Retrieve student earning details by channelId
+      parameters:
+        - in: path
+          name: channelId
+          required: true
+          schema:
+            type: string
+          description: The channel ID for which to retrieve earning details
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                result:
+                  - earningAmount: 100
+                    courseInfo:
+                      - lsSaId: 1
+                        apId: 123
+                        label: "Course A"
+                    courseType: "standalone"
+                    userDiscount:
+                      discountType: "Percentage"
+                      discountAmount: 10
+                      userEarning: 50
+                      studentEarning: 30
+                totalEarning: 500
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                error: Internal Server Error
+  
+  /api/v1/referral-link/{referralLinkId}/send/mail:
+    post:
+      tags:
+        - Referral Link
+      summary: Send emails to multiple recipients
+      parameters:
+        - name: referralLinkId
+          in: path
+          description: ID of the referral link to be deleted
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emails:
+                  type: string
+                  description: Comma-separated list of email addresses
+              required:
+                - emails
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                success: true
+                message: Emails sent successfully
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                success: false
+                message: Error sending emails
+  
+  
+  # referred student
+  /api/v1/referred-student:
+    get:
+      tags:
+        - Referred Student
+      summary: Get a list of referred students
+      description: |
+        This endpoint allows you to retrieve a list of referred students based on specified filters, pagination, and sorting.
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+          description: Number of items to return per page
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Search criteria for filtering students
+        - in: query
+          name: planId
+          schema:
+            type: string
+          description: Filter by plan ID
+        - in: query
+          name: courseType
+          schema:
+            type: string
+          description: Filter by course type
+        - in: query
+          name: studentPlanId
+          schema:
+            type: string
+          description: Filter by student plan ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                totalItems: 20
+                totalPages: 2
+                currentPage: 1
+                limit: 10
+                referredStudents:
+                  - _id: "123"
+                    studentDetails:
+                      name: "John Doe"
+                      email: "john.doe@example.com"
+                    price:
+                      originalPrice: "100"
+                      discountPrice: "80"
+                    courseType: "Math"
+                    planId: "xyz123"
+                    studentPlanId: "abc456"
+                    createdAt: "2023-01-01T12:00:00.000Z"
+                  # Add more items as needed
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: Internal Server Error
+
+# Forgot Password Email Verification
+  /api/v1/influencer/forgotPassword/email-verification:
+   post:
+    tags:
+      - Forgot_Password
+    summary: Forgot Password Email Verification Api
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: influencer
+        description: Email Verification of Forgotpassword
+        required: true
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+            
+        required:
+          - email
+          
+    responses:
+      200:
+        description: "Got the token successfully"
+      401:
+        description: "error.message"
+      404:
+        description: Influencer does not exist with this email
+
+# Forgot Password Verify Otp
+  /api/v1/influencer/forgotPassword/otp-verification:
+   post:
+    tags:
+      - Forgot_Password
+    summary: Forgot Password Otp Verification
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: influencer
+        description: Otp Verification of Forgotpassword
+        required: true
+        schema:
+          type: object
+          properties:
+            token:
+              type: string
+            otp:
+              type: string
+            
+        required:
+          - token
+          - otp
+          
+    responses:
+      200:
+        description: "veryfied Successfully!"
+      422:
+        description: "your otp is wrong"
+      500:
+        description: Internal Server Error
+
+# resend OTP
+  /api/v1/influencer/forgotPassword/resendOtp:
+   post:
+    tags:
+      - Forgot_Password
+    summary: resend otp
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: influencer
+        description: Email to resend otp
+        required: true
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+            
+        required:
+          - email
+          
+    responses:
+      200:
+        description: "Got the otp successfully"
+      401:
+        description: "error.message"
+      404:
+        description: Influencer does not exist with this email
+
+# Forgot Password Reset Password
+  /api/v1/influencer/forgotPassword/reset-password:
+   post:
+    tags:
+      - Forgot_Password
+    summary: Forgot and Reset Password
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: influencer
+        description: Reset password
+        required: true
+        schema:
+          type: object
+          properties:
+            token:
+              type: string
+            newPassword:
+              type: string
+            confirmPassword:
+              type: string
+            
+        required:
+          - token
+          - newPassword
+          - confirmPassword
+          
+    responses:
+      200:
+        description: "password reset successfully"
+      401:
+        description: "Token expired"
+      400:
+        description: "password and confirm password does not match"
+      404:
+        description: "User not found"
+
+# login 
+  /api/v1/influencer/login/password-verification:
+   post:
+    tags:
+      - Influencer
+    summary: Password Verification with login
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: influencer
+        description: Password Verification
+        required: true
+        schema:
+          type: object
+          properties:
+            token:
+              type: string
+            password:
+              type: string
+            rememberMe:
+              type: string
+            
+        required:
+          - token
+          - password
+          - rememberMe
+          
+    responses:
+      200:
+        description: "Logged in successfully"
+      401:
+        description: "Invalid email/phone/password"
+      404:
+        description: "Influencer not found "
+
+# login email Verification
+  /api/v1/influencer/login/email-verification:
+   post:
+    tags:
+      - Influencer
+    summary: Email Verification with login
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: influencer
+        description: Email Verification with login 
+        required: true
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+            
+        required:
+          - email
+          
+    responses:
+      200:
+        description: "Got the token successfully"
+      404:
+        description: "Influencer does not exist with this email "
+
+# change password
+  /api/v1/influencer/changePassword:
+   post:
+    tags:
+      - Influencer
+    summary: Change Password
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: influencer
+        description: Change Password
+        required: true
+        schema:
+          type: object
+          properties:
+            oldPassword:
+              type: string
+            newPassword:
+              type: string
+            confirmPassword:
+              type: string
+            
+        required:
+          - oldPassword
+          - newPassword
+          - confirmPassword
+          
+    responses:
+      200:
+        description: "Password updated successfully"
+      500:
+        description: "Internal Server error. Please try again later "
+      409:
+        description: "Old password is incorrect "
+      400:
+        description: "Please provide old password !! "
+      404:
+        description: "influencer not found"
+
+#add influencer
+  /influencer/addInfluencer:
+    post:
+      tags:
+        - "Influencer"
+      summary: "Add a New Influencer"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "influencer"
+          description: "Add a New Influencer"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              influencerDetails:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                    description: "Name of the influencer"
+                  email:
+                    type: "string"
+                    format: "email"
+                    description: "Email of the influencer (must be unique)"
+                  countryCode:
+                    type: "string"
+                    description: "Country code of the influencer"
+                  phone:
+                    type: "string"
+                    description: "Phone number of the influencer"
+              channel:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    brand_Id:
+                      type: "string"
+                      default: "null"
+                      description: "Brand ID associated with the channel"
+                    brandName:
+                      type: "string"
+                      default: "null"
+                      description: "Name of the brand associated with the channel"
+              status:
+                type: "string"
+                enum:
+                  - "Deleted"
+                  - "Active"
+                  - "Inactive"
+                default: "Active"
+                description: "Status of the influencer account"
+      responses:
+        201:
+          description: "Account created successfully"
+        400:
+          description: "Invalid email format or Invalid phone number format"
+        409:
+          description: "Influencer with this email already exists"
+        500:
+          description: "Internal Server Error"
+
+#update influencer by admin
+  /influencer/admin/updateInfluencer/{id}:
+    put:
+      tags:
+        - "Influencer"
+      summary: "update Influencer"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: id
+          description: id of influencer
+          required: true
+          schema:
+            type: string
+        - in: "body"
+          name: "influencer"
+          description: "update Influencer"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              influencerDetails:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                    description: "Name of the influencer"
+                  email:
+                    type: "string"
+                    format: "email"
+                    description: "Email of the influencer (must be unique)"
+                  countryCode:
+                    type: "string"
+                    description: "Country code of the influencer"
+                  phone:
+                    type: "string"
+                    description: "Phone number of the influencer"
+              channel:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    brand_Id:
+                      type: "string"
+                      default: "null"
+                      description: "Brand ID associated with the channel"
+                    brandName:
+                      type: "string"
+                      default: "null"
+                      description: "Name of the brand associated with the channel"
+              status:
+                type: "string"
+                enum:
+                  - "Deleted"
+                  - "Active"
+                  - "Inactive"
+                default: "Active"
+                description: "Status of the influencer account"
+      responses:
+        200:
+          description: "influencer updated successfully"
+        400:
+          description: "Invalid email format or Invalid phone number format"
+        409:
+          description: "Influencer with this email already exists"
+        500:
+          description: "Internal Server Error"
+
+#update influencer by token
+  /influencer/updateInfluencer:
+    put:
+      tags:
+        - "Influencer"
+      summary: "update Influencer"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
+        - in: "body"
+          name: "influencer"
+          description: "update Influencer"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              influencerDetails:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                    description: "Name of the influencer"
+                  email:
+                    type: "string"
+                    format: "email"
+                    description: "Email of the influencer (must be unique)"
+                  countryCode:
+                    type: "string"
+                    description: "Country code of the influencer"
+                  phone:
+                    type: "string"
+                    description: "Phone number of the influencer"
+              channel:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    brand_Id:
+                      type: "string"
+                      default: "null"
+                      description: "Brand ID associated with the channel"
+                    brandName:
+                      type: "string"
+                      default: "null"
+                      description: "Name of the brand associated with the channel"
+              status:
+                type: "string"
+                enum:
+                  - "Deleted"
+                  - "Active"
+                  - "Inactive"
+                default: "Active"
+                description: "Status of the influencer account"
+      responses:
+        201:
+          description: "Account created successfully"
+        400:
+          description: "Invalid email format or Invalid phone number format"
+        409:
+          description: "Influencer with this email already exists"
+        500:
+          description: "Internal Server Error"
+#update influencer status 
+  /influencer/changeInfluencerStatus:
+    put:
+      tags:
+        - "Influencer"
+      summary: "update Influencer status"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
+        - in: "body"
+          name: "influencer"
+          description: "update Influencer"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+                enum:
+                  - "Deleted"
+                  - "Active"
+                  - "Inactive"
+                default: "Active"
+                description: "Status of the influencer account"
+      responses:
+        201:
+          description: "status updated successfully"
+        400:
+          description: "influencer not found format"
+        500:
+          description: "Internal Server Error"
+
+# delete influencer
+  /influencer/deleteInfluencer/{id}:
+    delete:
+      tags:
+        - "Influencer"
+      summary: "delete Influencer"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: id
+          description: id of influencer
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "influencer deleted successfully"
+        404:
+          description: "influencer not found"
+        500:
+          description: "Internal Server Error"
+
+# get influencer
+  /api/v1/influencer/getAllInfluencer:
+   get:
+    tags:
+      - Influencer
+    summary: Get All Influencer
+    consumes:
+      - application/json
+    parameters:
+      - in: query
+        name: search
+        description: search influencer
+        schema:
+          type: string
+      - in: query
+        name: status
+        description: status of influencer
+        schema:
+          type: string  
+          
+    responses:
+      200:
+        description: "Get all Influencer list successfully !!"
+      500:
+        description: "Internal Server Error"
+
+# get influencer Details
+  /api/v1/influencer/getInfluencer/{id}:
+   get:
+    tags:
+      - Influencer
+    summary: Get All Influencer Details
+    consumes:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: id of influencer
+        required: true
+        schema:
+          type: string
+          
+    responses:
+      200:
+        description: "got influencer details successfully"
+      500:
+        description: "Internal Server Error"
+
+# Add Plan
+  /api/v1/plan/addPlan:
+    post:
+      tags:
+        - Plan
+      summary: "Create a new plan"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: plan
+          description: "The plan to create"
+          required: true
+          schema:
+            $ref: "#/definitions/PlanInput"
+
+      responses:
+        201:
+          description: "Plan Created successfully"
+          schema:
+            $ref: "#/definitions/PlanResponse"
+        400:
+          description: "Plan with the same name already exists"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+              error:
+                type: string
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+              error:
+                type: string
+
+
+
+  
+
+  /api/v1/plan/getplan:
+    get:
+      tags:
+        - Plan
+      summary: Get Plan Details
+      description: |
+        Retrieve plan details based on search criteria. Supports pagination, search, and filtering.
+      parameters:
+        - in: query
+          name: size
+          description: Number of plans to return per page
+          schema:
+            type: integer
+        - in: query
+          name: page
+          description: Page number (starts from 1)
+          schema:
+            type: integer
+        - in: query
+          name: search
+          description: Search query
+          schema:
+            type: string
+        - in: query
+          name: courseType
+          description: Filter by courseType
+          schema:
+            type: string
+        - in: query
+          name: userLimit
+          description: Filter by userLimit
+          schema:
+            type: string
+        - in: query
+          name: status
+          description: Filter by plan status
+          schema:
+            type: string
+        - in: query
+          name: startDate
+          description: Filter by plan validity start date
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: endDate
+          description: Filter by plan validity end date
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: fromDate
+          description: Filter by creation date range start
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: toDate
+          description: Filter by creation date range end
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                status: 1
+                message: Got All Plan details successfully
+                noOfPlans: 3
+                noOfPages: 1
+                plansPerPageCount: 10
+                currentPage: 1
+                plans:
+                  - # Plan details (example)
+                    _id: "6583ce5acc090287336986a7"
+                    channel: "Lawsikho"
+                    # ... (Other plan details)
+                  - # Plan details (example)
+                    _id: "6583ca718141100602e5397e"
+                    channel: "Skillarbitrage"
+                    # ... (Other plan details)
+                  - # Plan details (example)
+                    _id: "6583c8ed6fbcbbbabb962b93"
+                    channel: "Skillarbitrage"
+                    # ... (Other plan details)
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                status: 0
+                message: Internal Server Error
+                error: Error details
+
+
+# get Plan Details
+  /api/v1/plan/getplandetails/{id}:
+   get:
+    tags:
+      - Plan
+    summary: Get Plan Details With Id
+    consumes:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: id of plan
+        required: true
+        schema:
+          type: string
+          
+    responses:
+      200:
+        description: "got plan details successfully"
+      500:
+        description: "Internal Server Error"
+
+# get Active Plans Based On Influencer Id
+  /api/v1/plan/activeplansBasedonInfluencer/{influencerId}:
+   get:
+    tags:
+      - Plan
+    summary: Get Plans Based on Influencer Id
+    consumes:
+      - application/json
+    parameters:
+      - in: path
+        name: influencerId
+        description: id of Influencer
+        required: true
+        schema:
+          type: string
+          
+    responses:
+      200:
+        description: "Got All Active Plans Based on Influencer"
+      500:
+        description: "Internal Server Error"
+
+  /api/v1/plan/getActiveplan:
+    get:
+      tags:
+        - Plan
+      summary: Get Active Plans
+      description: Retrieve active plans based on filters.
+      parameters:
+        - in: query
+          name: studentId
+          schema:
+            type: string
+          description: ID of the student.
+        - in: query
+          name: influencerId
+          schema:
+            type: string
+          description: ID of the influencer.
+        - in: query
+          name: adminId
+          schema:
+            type: string
+          description: ID of the admin.
+      responses:
+        '200':
+          description: Successful response with active plans.
+          content:
+            application/json:
+              example:
+                status: 1
+                message: Got Active Plans successfully
+                activePlans:
+                  - _id: "6583ca718141100602e5397e"
+                    channel: "Skillarbitrage"
+                    courseType: "Course"
+                    coursePackageBootcamp: "SomePackage"
+                    coursePlan: "ABC1234"
+                    planName: "MyPlan2"
+                    isAvailableForStudent: true
+                    students:
+                      - studentId: "617c8201672d0823e0d33c7d"
+                        discountType: "Flat"
+                        studentEarning: 0
+                        userEarning: 0
+                        _id: "6583ca718141100602e5397f"
+                      - studentId: "617c8201672d0823e0d33c7e"
+                        discountType: "Percentage"
+                        studentEarning: 0
+                        userEarning: 0
+                        _id: "6583ca718141100602e53980"
+                    isAvailableForInfluencer: false
+                    isAvailableForAdmin: true
+                    admins:
+                      - adminId: "617c8201672d0823e0d33c7f"
+                        discountType: "Flat"
+                        adminEarning: 0
+                        _id: "6583ca718141100602e53981"
+                      - adminId: "617c8201672d0823e0d33c80"
+                        discountType: "Percentage"
+                        adminEarning: 0
+                        _id: "6583ca718141100602e53982"
+                    planValidityRange:
+                      startDate: "2023-01-01T00:00:00.000Z"
+                      endDate: "2023-12-31T00:00:00.000Z"
+                    userLimit: 100
+                    status: "Active"
+                    influencers: []
+                    createdAt: "2023-12-21T05:17:37.248Z"
+                    updatedAt: "2023-12-21T05:17:37.248Z"
+                    __v: 0
+        '500':
+          description: Internal Server Error response.
+          content:
+            application/json:
+              example:
+                status: 0
+                message: Internal Server Error
+                error: "Error details here..."
+  /api/v1/influencer/getAllInfluencer/external:
+    get:
+      tags:
+        - Influencer
+      summary: "Get Influencers for External"
+      description: "Retrieve influencers based on search, channel, and status."
+      parameters:
+        - name: search
+          in: query
+          description: "Search query for name, email, or combined phone (case-insensitive)."
+          required: false
+          type: string
+        - name: channel
+          in: query
+          description: "Filter influencers by channel brand ID (case-insensitive)."
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: "Filter influencers by status (case-insensitive)."
+          required: false
+          type: string
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                default: false
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/Influencer"
+              totalDocuments:
+                type: integer
+              message:
+                type: string
+                default: "Get all Influencer list successfully !!"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+                default: true
+              err:
+                type: object
+              message:
+                type: string
+
+# Update Plan Api
+  /api/v1/plan/updateplan/{id}:
+    put:
+      tags:
+        - Plan
+      summary: Update a plan
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the plan to be updated
+          schema:
+            type: string
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
+        - in: body
+          name: plan
+          description: "The plan to update"
+          required: true
+          schema:
+            $ref: "#/definitions/PlanInput"
+
+      
+             
+      responses:
+        '200':
+          description: Plan updated successfully
+          content:
+            application/json:
+              example:
+                success: true
+                message: Plan updated successfully
+                plan:
+                  # Response may include the added plan details
+                  channelInfo:
+                    lsSaRefId: your_channel_id
+                    name: Your Channel
+                  courseType: standalone
+                  courseInfo:
+                    lsSaId: 123
+                    apId: 456
+                    label: Course Label
+                  coursePlanInfo:
+                    planDetail: Some details about the plan
+                  planName: MyPlan123
+                  registered: 10
+                  status: Active
+                  appliedForAllStudent: True
+                  appliedForAllInfluencer: False
+                  appliedForAllAdmin: False
+                  studentDiscount:
+                    discountType: Flat
+                    userEarning: 10
+                  influencerDiscount:
+                    discountType: Percentage
+                    userEarning: 5
+                  adminDiscount:
+                    discountType: Flat
+                    userEarning: 15
+                    studentEarning: 20
+                  planValidityRange:
+                    startDate: 2023-01-01
+                    endDate: 2023-12-31
+                  userLimit: 100
+
+        '400':
+          description: "Bad Request"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              error:
+                type: string
+
+        '500':
+          description: "Internal Server Error"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              error:
+                type: string
+
+# Check Validity
+  /api/v1/plan/checkValidity:
+    post:
+      tags:
+        - Plan
+      summary: Validity Check for Refferal Code and Link
+      parameters:
+      requestBody:
+        description: Payload for Validity Check
+        required: true
+        content:
+          application/json:
+            example:
+              referralLink: "LINK"
+              referralCode: "17036709034170"
+      responses:
+        '200':
+          description: Validity check passed successfully
+        '400':
+          description: ReferralLink not found
+          content:
+            application/json:
+              example:
+                message: "ReferralLink not found"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+
+# GetActive Plan Based on Token
+  /api/v1/plan/getinfluencerandadminactiveplan:
+    post:
+      tags:
+        - Plan
+      summary: getinfluencerandadminactiveplan
+      parameters:
+      requestBody:
+        description: Payload for getinfluencerandadminactiveplan
+        required: true
+        content:
+          application/json:
+            example:
+              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NThhNjVmMGMzNGQ5YjIwNGJhOWU2MzQiLCJlbWFpbCI6InJhZ2luaUBnbWFpbC5jb20iLCJuYW1lIjoiUmFnaW5pIERldmFzIiwicGhvbmUiOiI2Njc3Njg5NjY2Iiwicm9sZSI6IkluZmx1ZW5jZXIiLCJpYXQiOjE3MDM3NTIzODQsImV4cCI6MTcwNjM0NDM4NH0.PkyegDCJ1d1aEbqDGXlxLvT3vOBYbgvt01Q1My_N6VU"
+      responses:
+        '200':
+          description: Got All Active Plan
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+# Plan Remove Api
+  /api/v1/plan/removeplan/{id}:
+    delete:
+      tags:
+        - Plan
+      summary: Remove Plan Api
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the plan to be delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Plan marked as deleted
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+
+# Status Change Api
+  /api/v1/plan/planstatuschange/{planId}:
+    patch:
+      tags:
+        - Plan
+      summary: StatusChange Plan Api
+      parameters:
+        - in: path
+          name: planId
+          required: true
+          description: ID of the plan to status change
+          schema:
+            type: string
+        - in: query
+          name: status
+          required: true
+          description: status to change
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status value changed successfully for this status
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+      
+
+
+  /api/v1/studentplanmapping/addStudentPlan:
+    post:
+      tags:
+        - Student Plan Mapping
+      summary: Add a new student plan mapping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              userInfo:
+                id: 123
+                apId: 456
+                channel:
+                  brandId: 789
+                  name: Your Channel Name
+                name: John Doe
+                email: john.doe@example.com
+                countryCode: "+1"
+                phone: "1234567890"
+              planId: "613f84f4b2092f62b8c4c4e0"
+              referralLink: "https://example.com/referral-link"
+              referralCode: "ABC123"
+              consumedUserCount: 0
+              status: Active
+      responses:
+        '201':
+          description: Student plan added successfully
+          content:
+            application/json:
+              example:
+                message: Student plan added successfully
+                data:
+                  _id: "6141008e37a59b52486c21a3"
+                  userInfo:
+                    id: 123
+                    apId: 456
+                    channel:
+                      brandId: 789
+                      name: Your Channel Name
+                    name: John Doe
+                    email: john.doe@example.com
+                    countryCode: "+1"
+                    phone: "1234567890"
+                  planId: "613f84f4b2092f62b8c4c4e0"
+                  referralLink: "https://example.com/referral-link"
+                  referralCode: "ABC123"
+                  consumedUserCount: 0
+                  status: Active
+                createdAt: "2023-09-14T10:38:38.826Z"
+                updatedAt: "2023-09-14T10:38:38.826Z"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: Bad Request
+                error: true
+                err: Invalid student plan details
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: Internal server error
+                error: true
+                err: Internal server error
+
+# Get General and Course Based Plan
+  /api/v1/studentplanmapping/getGeneralandCoursePlan:
+    get:
+      tags:
+        - Student Plan Mapping
+      summary: Get General and Course Based Plan
+      parameters:
+        - in: query
+          name: courseType
+          required: true
+          description: courseType of the Plan
+          schema:
+            type: string
+        - in: query
+          name: lsSaId
+          required: true
+          description: lsSaId of the Plan
+          schema:
+            type: string
+        - in: query
+          name: apId
+          required: true
+          description: apId of the Plan
+          schema:
+            type: string
+        - in: query
+          name: label
+          required: true
+          description: label of the Plan
+          schema:
+            type: string
+        - in: query
+          name: name
+          required: true
+          description: name of the Plan
+          schema:
+            type: string
+        - in: query
+          name: lsSaRefId
+          required: true
+          description: lsSaRefId of the Plan
+          schema:
+            type: string
+      responses:
+        
+        '404':
+          description: No active plans found for the specified criteria
+          content:
+            application/json:
+              example:
+                message: "No active plans found for the specified criteria"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+
+
+# Get CourseBased Plan
+  /api/v1/plan/getCourseBasedplan:
+    get:
+      tags:
+        - Plan
+      summary: Get CourseBased Plan
+      parameters:
+        - in: query
+          name: courseType
+          required: true
+          description: courseType of the Plan
+          schema:
+            type: string
+        - in: query
+          name: lsSaId
+          required: true
+          description: lsSaId of the Plan
+          schema:
+            type: string
+        - in: query
+          name: apId
+          required: true
+          description: apId of the Plan
+          schema:
+            type: string
+        - in: query
+          name: label
+          required: true
+          description: label of the Plan
+          schema:
+            type: string
+        - in: query
+          name: name
+          required: true
+          description: name of the Plan
+          schema:
+            type: string
+        - in: query
+          name: channelId
+          required: true
+          description: channelId of the Plan
+          schema:
+            type: string
+        - in: query
+          name: studentId
+          required: true
+          description: studentId of the Plan
+          schema:
+            type: string
+      responses:
+        
+        '404':
+          description: No active plans found for the specified criteria
+          content:
+            application/json:
+              example:
+                message: "No active plans found for the specified criteria"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+
+
+  /api/v1/plan/remainingUserCount/{plan_id}:
+    get:
+      tags:
+        - Plan
+      summary: Get the remaining user count for a plan
+      description: Retrieve the remaining user count for a plan by its ID.
+      parameters:
+        - name: plan_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the plan to retrieve the remaining user count for
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Got remaining user count
+                  remainingUserCount:
+                    type: integer
+                    description: The remaining user count (userLimit - registeredCount), or null if userLimit is null
+        '404':
+          description: Plan not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Plan not found
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server error
+                  error:
+                    type: string
+
+# Get General Plan
+  /api/v1/plan/generalPlan:
+    get:
+      tags:
+        - Plan
+      summary: Get generalPlan
+      parameters:
+        - in: query
+          name: studentId
+          required: true
+          description: studentId of the Plan
+          schema:
+            type: string
+        - in: query
+          name: channelId
+          required: true
+          description: channelId of the Plan
+          schema:
+            type: string
+        
+      responses:
+        
+        '200':
+          description: Got All GeneralPlan
+          content:
+            application/json:
+              example:
+                message: "Got All GeneralPlan"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+
+# Get CourseInfo
+  /api/v1/plan/courseInfo:
+    get:
+      tags:
+        - Plan
+      summary: Get courseInfo
+      parameters:
+        - in: query
+          name: studentId
+          required: true
+          description: studentId of the Plan
+          schema:
+            type: string
+        - in: query
+          name: channelId
+          required: true
+          description: channelId of the Plan
+          schema:
+            type: string
+        - in: query
+          name: courseType
+          required: true
+          description: courseType of the Plan
+          schema:
+            type: string
+        
+      responses:
+        
+        '200':
+          description: Got CourseInfo Data
+          content:
+            application/json:
+              example:
+                message: "Got CourseInfo Data"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+
+# Get Plan Consume
+  /api/v1/plan/planconsume:
+    post:
+      tags:
+        - Plan
+      summary: Get Plan Consume
+      parameters:
+      requestBody:
+        description: Payload for Plan Consume check
+        required: true
+        content:
+          application/json:
+            example:
+              referralLink: "LINK"
+              referralCode: "17036709034170"
+      responses:
+        
+        '404':
+          description: Admin or User Data Updated successfully
+          content:
+            application/json:
+              example:
+                message: "Admin or User Data Updated successfully"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+
+# Get Plan Reporting
+  /api/v1/plan/planreporting:
+    get:
+      tags:
+        - Plan
+      summary: Get Plan Reporting
+      responses:
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: "Internal server error"
+                error: "Error details here"
+#add Lead
+  /api/v1/lead/addLead:
+    post:
+      tags:
+        - External APIs
+      summary: "Add a New Lead"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Lead"
+          description: "Add a New Lead"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              leadDetails:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                    description: "Name of the lead"
+                  email:
+                    type: "string"
+                    format: "email"
+                    description: "Email of the lead"
+                  countryCode:
+                    type: "string"
+                    description: "Country code of the lead"
+                  phone:
+                    type: "string"
+                    description: "Phone number of the lead"
+              referralCode:
+                type: "string"
+                description: "referral code"
+      responses:
+        201:
+          description: "Lead added successfully"
+        500:
+          description: "Internal Server Error"
+
+
+  schemas:
+    ReferralLink:
+      type: object
+      properties:
+        referralLink:
+          type: string
+        channel:
+          type: string
+        userDiscount:
+          type: object
+          properties:
+            discountType:
+              type: string
+            discountAmount:
+              type: number
+        userLimit:
+          type: integer
+        referralCode:
+          type: string
+        courseType:
+          type: string
+        status:
+          type: string
+  schemas:
+    ReferralLink:
+      type: object
+      properties:
+        referralLink:
+          type: string
+        channel:
+          type: string
+        userDiscount:
+          type: object
+          properties:
+            discountType:
+              type: string
+            discountAmount:
+              type: number
+        userLimit:
+          type: integer
+        referralCode:
+          type: string
+        courseType:
+          type: string
+        status:
+          type: string
+#successfull payment update all table
+  /api/v1/lead/paymentSuccessfull:
+    patch:
+      tags:
+        - External APIs
+      summary: "update all the tables Lead, referral link and plan"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Lead"
+          description: "update all the tables Lead, referral link and plan"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              studentDetails:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                    description: "Name of the lead"
+                  email:
+                    type: "string"
+                    format: "email"
+                    description: "Email of the lead"
+                  countrycode:
+                    type: "string"
+                    description: "Country code of the lead"
+                  phone:
+                    type: "string"
+                    description: "Phone number of the lead"
+              referralCode:
+                type: "string"
+                description: "referral code"
+              price:
+                type: "object"
+                properties:
+                  originalPrice:
+                    type: "string"
+                    description: "original price"
+                  discountPrice:
+                    type: "string"
+                    description: "discount price"
+              courseType:
+                  type: "string"
+                  description: "type of course standalone/package/bootcamp"
+              courseInfo:
+                  type: object
+                  properties:
+                    lsSaId:
+                      type: number
+                    apId:
+                      type: number
+                    label:
+                      type: string
+                  
+      responses:
+        200:
+          description: "Lead updated successfully"
+        500:
+          description: "Internal Server Error"
+definitions:
+  PlanInput:
+    type: object
+    properties:
+      channelInfo:
+        type: object
+        properties:
+          lsSaRefId:
+            type: string
+          name:
+            type: string
+      courseType:
+        type: string
+      courseInfo:
+        type: array
+        items:
+          type: object
+          properties:
+            lsSaId:
+              type: number
+            apId:
+              type: number
+            label:
+              type: string
+            urlSegment:
+              type: string
+      planName:
+        type: string
+      registeredCount:
+        type: number
+      status:
+        type: string
+      appliedForAllStudent:
+        type: boolean
+      appliedForAllInfluencer:
+        type: boolean
+      appliedForAllAdmin:
+        type: boolean
+      studentDiscount:
+        type: object
+        properties:
+          discountType:
+            type: string
+          userEarning:
+            type: string
+          studentEarning:
+            type: string
+          upto:
+            type: number
+      influencerDiscount:
+        type: object
+        properties:
+          discountType:
+            type: string
+          userEarning:
+            type: string
+          upto:
+            type: number
+      adminDiscount:
+        type: object
+        properties:
+          discountType:
+            type: string
+          userEarning:
+            type: string
+          upto:
+            type: number
+      planValidityRange:
+        type: object
+        properties:
+          startDate:
+            type: string
+            format: date
+          endDate:
+            type: string
+            format: date
+      userLimit:
+        type: number
+      createdBy:
+        type: string
+      selectedInfluencer:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+            name:
+              type: string
+      selectedAdmin:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+            name:
+              type: string
+      selectedStudent:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+            name:
+              type: string
+      editLog:
+        type: array
+        items:
+          type: object
+          properties:
+            changeTime:
+              type: string
+              format: date-time
+            changeBy:
+              type: object
+              properties:
+                refId:
+                  type: string
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: object
+                  properties:
+                    countryCode:
+                      type: string
+                    phoneNo:
+                      type: string
+                    consolidatedPhoneNo:
+                      type: string
+            payload:
+              type: array
+              items:
+                type: object
+
+  PlanResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        default: true
+      message:
+        type: string
+      plan:
+        $ref: "#/definitions/PlanInput"
